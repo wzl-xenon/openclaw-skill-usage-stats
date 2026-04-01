@@ -1,0 +1,88 @@
+# OpenClaw Usage Statistics Skill | OpenClaw 用量统计技能
+
+---
+
+**English**
+Full-featured usage statistics skill for OpenClaw, which can count all usage data during OpenClaw operation and support visual report generation. Suitable for personal usage analysis, cost accounting, and exception monitoring.
+
+**中文**
+OpenClaw 全功能用量统计技能，可统计OpenClaw运行期间的所有使用数据，支持可视化报表生成，适用于个人使用分析、成本核算、异常监控场景。
+
+---
+
+## ✨ Core Features | 核心功能
+
+| Feature | 功能说明 |
+|---------|---------|
+| Multi-dimensional statistics | 多维度统计：总消息量、用户输入/助手回复/工具返回分类统计、工具调用明细（次数/成功率/平均耗时）、会话统计、按小时/天时间趋势 |
+| Visual reports | 可视化报表：自动生成饼图/柱状图/折线图组合统计图表，支持固定周期/自定义时间范围 |
+| Practical tools | 实用功能：CSV明细导出、5分钟查询缓存、异常用量告警、使用行为分析报告 |
+| Flexible time range | 灵活时间范围：支持24h/7d/30d固定周期查询，也支持任意起止时间自定义查询 |
+
+---
+
+## 📦 Installation | 安装
+1. Download this skill to OpenClaw `skills/` directory
+2. Install dependencies:
+```bash
+pip3 install matplotlib
+apt install -y fonts-noto-cjk # Fix Chinese display issue / 解决中文显示乱码问题
+```
+3. Restart OpenClaw service to load the skill
+
+---
+
+## 🚀 Usage | 使用方法
+
+### Basic Text Statistics | 基础文本统计
+```bash
+# Query last 24 hours data / 查询近24小时数据
+python3 scripts/get_usage_stats.py 24h
+# Query last 7 days data / 查询近7天数据
+python3 scripts/get_usage_stats.py 7d
+# Query last 30 days data / 查询近30天数据
+python3 scripts/get_usage_stats.py 30d
+# Query custom time range / 查询自定义时间范围
+python3 scripts/get_usage_stats.py "2026-04-01 09:00" "2026-04-01 18:00"
+# Export to CSV file / 导出CSV明细数据
+python3 scripts/get_usage_stats.py 7d --export
+# Force refresh latest data / 强制刷新最新数据（跳过缓存）
+python3 scripts/get_usage_stats.py 24h --force
+```
+
+### Generate Visual Charts | 生成可视化图表
+```bash
+# Generate charts for 24h/7d/30d at once / 同时生成24h/7d/30d三个固定周期的统计图表
+python3 scripts/generate_all_period_charts.py
+# Generate chart for custom time range / 生成自定义时间范围统计图表
+python3 scripts/generate_custom_usage_chart.py "2026-04-01 09:00" "2026-04-01 18:00"
+```
+
+### Behavior Analysis Report | 使用行为分析报告
+```bash
+python3 scripts/generate_behavior_analysis.py
+```
+
+---
+
+## 📊 Output Example | 输出示例
+```
+📊 统计时间范围：2026-03-31 14:00 至 2026-04-01 14:00
+🔢 总消息次数：486 次
+  ├─ 用户输入：51 次
+  ├─ 助手回复：243 次
+  │  └─ 包含工具调用：193 次
+  └─ 工具返回结果：192 次
+✅ 分类校验：用户+助手+工具返回 = 486 次，与总消息数一致
+⚠️ 【异常告警】今日用量异常！当前总消息数486次，超过近7天日均6.0次的3倍
+
+🛠️ 工具调用统计（Top5）：
+  exec：74 次 | 成功率 98.6% | 平均耗时 1.81s
+  edit：73 次 | 成功率 100.0% | 平均耗时 0.04s
+  process：17 次 | 成功率 100.0% | 平均耗时 24.62s
+```
+
+---
+
+## 📄 License | 许可证
+MIT License
