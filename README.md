@@ -88,6 +88,7 @@ python3 scripts/generate_behavior_analysis.py
 ---
 
 ## 📊 Output Example | 输出示例
+### Text Statistics | 文本统计
 ```
 📊 统计时间范围：2026-03-31 14:00 至 2026-04-01 14:00
 🔢 总消息次数：486 次
@@ -103,6 +104,10 @@ python3 scripts/generate_behavior_analysis.py
   edit：73 次 | 成功率 100.0% | 平均耗时 0.04s
   process：17 次 | 成功率 100.0% | 平均耗时 24.62s
 ```
+
+### Visual Chart | 可视化图表
+![Usage Statistics Demo](usage_stats_demo.png)
+*Fully desensitized demo chart, no real user data included / 完全脱敏的示例图表，不含任何真实用户数据*
 
 ---
 
